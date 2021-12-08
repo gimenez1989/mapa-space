@@ -8,8 +8,16 @@ const MapaSpace = () => {
     const [visibility, setVisibility] = useState(false)
     const classes = useStyles()
 
-    const Change = () => {
+    const onChangeMoon  = () => {
         if (visibility === false) {
+            map.setLayoutProperty("layermoon", "visibility", "visible")
+            map.setLayoutProperty("layermars", "visibility", "none")
+        }
+        setVisibility(!visibility)
+    }
+
+    const onChangeMars  = () => {
+        if (visibility === true) {
             map.setLayoutProperty("layermars", "visibility", "visible")
             map.setLayoutProperty("layermoon", "visibility", "none")
         }
@@ -23,14 +31,6 @@ const MapaSpace = () => {
                 style: {
                     version: 8,
                     sources: {
-                        Moon: {
-                            type: "raster",
-                            scheme: "tms",
-                            tiles: [
-                                "https://cartocdn-gusc.global.ssl.fastly.net/opmbuilder/api/v1/map/named/opm-moon-basemap-v0-1/all/{z}/{x}/{y}.png",
-                            ],
-                            tileSize: 256,
-                        },
                         Mars: {
                             type: "raster",
                             scheme: "tms",
@@ -38,21 +38,29 @@ const MapaSpace = () => {
                                 "https://cartocdn-gusc.global.ssl.fastly.net/opmbuilder/api/v1/map/named/opm-mars-basemap-v0-2/all/{z}/{x}/{y}.png",
                             ],
                             tileSize: 256,
+                        },
+                        Moon: {
+                            type: "raster",
+                            scheme: "tms",
+                            tiles: [
+                                "https://cartocdn-gusc.global.ssl.fastly.net/opmbuilder/api/v1/map/named/opm-moon-basemap-v0-1/all/{z}/{x}/{y}.png",
+                            ],
+                            tileSize: 256,
                         }
                     },
                     layers: [
                         {
-                            id: "layermoon",
+                            id: "layermars",
                             type: "raster",
-                            source: "Moon",
+                            source: "Mars",
                             layout: {
                                 visibility: "visible"
                             }
                         },
                         {
-                            id: "layermars",
+                            id: "layermoon",
                             type: "raster",
-                            source: "Mars",
+                            source: "Moon",
                             layout: {
                                 visibility: "none"
                             }
@@ -67,22 +75,22 @@ const MapaSpace = () => {
 
     return (
         <Container className={classes.mapContainer} id="map">
-           { /* <Box>
+            <Box>
                 <Button className={classes.Moon}
                     onClick={() => {
-                        Change()
+                        onChangeMoon ()
                     }}>
                     <p>Moon</p>
                 </Button>
-            </Box>*/}
-            <Box>
-                <Button className={classes.Mars}
+            </Box>
+             <Box>
+               <Button className={classes.Mars}
                     onClick={() => {
-                        Change();
+                        onChangeMars()
                     }}>
                     <p>Mars</p>
                 </Button>
-                </Box>
+            </Box>
         </Container >
     )
 }
