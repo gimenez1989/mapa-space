@@ -1,28 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { Map } from "maplibre-gl"
-import { Container, Button, Box } from '@material-ui/core'
+import { Container, Drawer} from '@material-ui/core'
 import useStyles from './styles'
+import LayerButton from '../LayerButton'
 
 const MapaSpace = () => {
     const [map, setMap] = useState(null)
-    const [visibility, setVisibility] = useState(false)
     const classes = useStyles()
-
-    const onChangeMoon  = () => {
-        if (visibility === false) {
-            map.setLayoutProperty("layermoon", "visibility", "visible")
-            map.setLayoutProperty("layermars", "visibility", "none")
-        }
-        setVisibility(!visibility)
-    }
-
-    const onChangeMars  = () => {
-        if (visibility === true) {
-            map.setLayoutProperty("layermars", "visibility", "visible")
-            map.setLayoutProperty("layermoon", "visibility", "none")
-        }
-        setVisibility(!visibility)
-    }
+   
 
     useEffect(() => {
         setMap(
@@ -75,22 +60,11 @@ const MapaSpace = () => {
 
     return (
         <Container className={classes.mapContainer} id="map">
-            <Box>
-                <Button className={classes.Moon}
-                    onClick={() => {
-                        onChangeMoon ()
-                    }}>
-                    <p>Moon</p>
-                </Button>
-            </Box>
-             <Box>
-               <Button className={classes.Mars}
-                    onClick={() => {
-                        onChangeMars()
-                    }}>
-                    <p>Mars</p>
-                </Button>
-            </Box>
+            <Drawer className={classes.drawer}
+            variant="permanent"
+            >
+                {map && <LayerButton map={map} />}
+            </Drawer>
         </Container >
     )
 }

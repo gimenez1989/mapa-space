@@ -10,14 +10,7 @@ export default makeStyles((theme) => ({
         padding: 0,
         lineHeight: 0
     },
-    Moon: {
-        background: 'blue',
-        color: 'white',
-        position: 'relative; z-index:1'
-    },
-    Mars: {
-        background: 'red',
-        color: 'white',
-        position: 'relative; z-index:1'
+    drawer: {
+        width: '240px'
     }
 }))
