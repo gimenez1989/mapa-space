@@ -17,22 +17,26 @@ const LayerButton = ({ map }) => {
 
     return (
         <Container>
-                <Box>
-                    <Button className={classes.Moon}
-                        onClick={() => {
-                            onChangeMoon()
-                        }}>
-                        <p>Moon</p>
-                    </Button>
-                </Box>
-                <Box>
-                    <Button className={classes.Mars}
-                        onClick={() => {
-                            onChangeMars()
-                        }}>
-                        <p>Mars</p>
-                    </Button>
-                </Box>
+            <Box>
+                <Button className={classes.Moon}
+                    variant="contained"
+                    color="primary"
+                    onClick={() => {
+                        onChangeMoon()
+                    }}>
+                    <p>Moon</p>
+                </Button>
+            </Box>
+            <Box>
+                <Button className={classes.Mars}
+                    variant="contained"
+                    color="secondary"
+                    onClick={() => {
+                        onChangeMars()
+                    }}>
+                    <p>Mars</p>
+                </Button>
+            </Box>
         </Container>
     )
 }
